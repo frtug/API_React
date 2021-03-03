@@ -38,8 +38,9 @@ class Main extends Component{
             <div className = "main">
                 <Header />
                <Switch>
-                    <Route path="/home" component = {() =><Home Users = {this.state.users}  />} />
-                    <Route exact path="/post/:postId" component = {Post} />
+                    <Route  exact path="/home" component = {() =><Home Users = {this.state.users}  />} />
+                    <Route  path="/post" component = {PostPage} />
+                    <Route  path="/post/:postId" component = {Post} />
                     <Redirect to="/home" />
                     </Switch>
                <Footer />

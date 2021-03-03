@@ -3,31 +3,33 @@ import {Breadcrumb,BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination'; 
 
-const Post = (props) =>{
-                    console.log(props.Postid)
+const Post = () =>{
 
     const [posts,setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postPerPage] = useState(10);
     
-    useEffect((props) =>{
+    useEffect(() =>{
         const fetchPost = async () => {
             fetch('https://jsonplaceholder.typicode.com/posts')
             .then(res => res.json())
             .then((data)=>{
-                setPosts(data.userId) 
+                setPosts(data) 
             })   
             .catch(console.log)
         }
-    fetchPost()
+    fetchPost();
     },[]);
     var indexOfLastPost = currentPage * postPerPage;
     var indexOfFirstPost = indexOfLastPost - postPerPage
     var currentPost = posts.slice(indexOfFirstPost,indexOfLastPost);
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        console.log("I am Used",pageNumber);
+    }
 
-    const menu = currentPost.map(function kk(post,props) {
+    const menu = currentPost.map((post) => {
 
         return (
             <div key={post.id} className="col-12 col-md-12 m-1" >
